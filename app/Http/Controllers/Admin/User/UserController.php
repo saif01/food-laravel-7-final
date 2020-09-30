@@ -278,29 +278,29 @@ class UserController extends Controller
         }
 
         if (Auth::user()->id == $id) {
-            return back()->with(['message' => 'Sorry !! you can not delete by yourself.', 'icon' => 'error']);
+            return response()->json(['success' => 'Sorry !! you can not delete by yourself.', 'icon' => 'error']);
         }
 
-        // $data = User::findOrFail($id);
+        $data = User::findOrFail($id);
 
-        // //Delete Role data
-        // $data->roles()->sync(null);
+        //Delete Role data
+        $data->roles()->sync(null);
 
-        // //Delete Image
-        // $image_path = $data->image;
-        // if (!empty($image_path)) {
-        //     //unlink(public_path($image_path));
-        //     unlink($image_path);
-        // }
-        // //Delete Small Image
-        // $image_small_path = $data->image_small;
-        // if (!empty($image_small_path)) {
-        //     unlink($image_small_path);
-        // }
+        //Delete Image
+        $image_path = $data->image;
+        if (!empty($image_path)) {
+            //unlink(public_path($image_path));
+            unlink($image_path);
+        }
+        //Delete Small Image
+        $image_small_path = $data->image_small;
+        if (!empty($image_small_path)) {
+            unlink($image_small_path);
+        }
 
-        //$success = $data->delete();
+        $success = $data->delete();
 
-        if (true) {
+        if ($success) {
             return response()->json(['success' => 'Successfully Deleted', 'icon' => 'success']);
         } else {
             return response()->json(['success' => 'Something going wrong !!', 'icon' => 'error']);

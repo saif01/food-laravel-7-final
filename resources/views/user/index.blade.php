@@ -1,5 +1,5 @@
 @extends('user.layout.user-master')
-@section('title', 'CP Five Star Dashboard')
+@section('title', 'CP Five Star - Bangladesh')
 
 
 
