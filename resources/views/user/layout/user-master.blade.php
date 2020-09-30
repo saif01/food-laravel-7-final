@@ -20,6 +20,8 @@
     <link href="{{ asset('all-assets/user/css/style.css') }}" rel="stylesheet">
     <!-- Social media icon -->
     <link href="{{ asset('all-assets/common/social-icon/css/floating.css') }}" rel="stylesheet">
+    <!-- Back to top Button -->
+    <link href="{{ asset('all-assets/common/scroll-top/css/back-to-top.css') }}" rel="stylesheet">
 
     <style>
         .header-bg{
@@ -39,7 +41,7 @@
 
 <body class="home">
 
-<!-- Load Facebook SDK for JavaScript -->
+     <!-- Load Facebook SDK for JavaScript -->
       <div id="fb-root"></div>
       <script>
         window.fbAsyncInit = function() {
@@ -62,7 +64,7 @@
         attribution=setup_tool
         page_id="102603987981724">
       </div>
-
+    <!--End Load Facebook SDK for JavaScript -->
 
     <div class="site-wrapper animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
         <!--header starts-->
@@ -182,6 +184,9 @@
 
 
 
+        <!-- Back to top button -->
+        <a id="button"></a>
+
         <!-- start: FOOTER -->
         <footer class="footer">
             <div class="container">
@@ -230,12 +235,13 @@
     <script src="{{ asset('all-assets/user/js/headroom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('all-assets/user/js/foodpicky.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('all-assets/user/js/navbar-active.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('all-assets/common/scroll-top/js/back-to-top.js') }}" type="text/javascript"></script>
+
 
     {{-- Page Js --}}
     @stack('page-js')
 
     <script>
-
 
         $(function() {
           // ------------------------------------------------------- //

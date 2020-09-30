@@ -56,7 +56,7 @@
     <div class="hero-inner">
         <p class="tlt animated_text">CP Five Star</p>
         <div class="container text-center hero-text font-white">
-            <h1 class="tlt" style="color:#fdbc56; text-shadow: 4px 4px 4px #e51937;">We Believe In Better Quelity And Service</h1>
+            <h1 class="tlt" style="color:#fdbc56; text-shadow: 4px 4px 4px #e51937;">We Believe In Better Quality And Service</h1>
         </div>
     </div>
     <!--end:Hero inner -->

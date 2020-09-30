@@ -79,7 +79,7 @@ class UserController extends Controller
                     if (Gate::allows('edit')) {
                         $button .= '<button type="button" id="' . $data->id . '" class="edit btn btn-primary btn-sm" ><i class="fas fa-edit"></i> Edit</button>';
                     }
-                    if (Gate::allows('delete')) {
+                    if (Gate::allows('superuser')) {
                         $button .= '&nbsp;&nbsp;&nbsp;<button type="button" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash" ></i> Delete</button>';
                     }
 
@@ -278,7 +278,7 @@ class UserController extends Controller
         }
 
         if (Auth::user()->id == $id) {
-            return response()->json(['success' => 'Sorry !! you can not delete by yourself.', 'icon' => 'error'], 403);
+            return back()->with(['message' => 'Sorry !! you can not delete by yourself.', 'icon' => 'error']);
         }
 
         // $data = User::findOrFail($id);
