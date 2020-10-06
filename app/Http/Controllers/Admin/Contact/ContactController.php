@@ -110,7 +110,8 @@ class ContactController extends Controller
         }
 
         $rules = array(
-            'contact'   =>  'required|regex:/(01)[0-9]{9}/|max:11',
+            //'contact'   =>  'required|regex:/(01)[0-9]{9}/|max:11',
+            'contact'   =>  'required',
             'email'     =>  'required|email',
             'address'   =>  'required|min:3|max:20000',
         );
@@ -162,7 +163,7 @@ class ContactController extends Controller
         $id = $request->hidden_id;
 
         $rules = array(
-            'contact'   =>  'required|regex:/(01)[0-9]{9}/|max:11',
+            'contact'   =>  'required',
             'email'     =>  'required|email',
             'address'   =>  'required|min:3|max:20000',
         );

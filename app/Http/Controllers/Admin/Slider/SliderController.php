@@ -47,6 +47,9 @@ class SliderController extends Controller
                 ->addColumn('details', function ($data) {
                     $button = '';
 
+                    $button .= '<b>Header : </b>' . $data->header . '<br>';
+                    $button .= '<b>Remarks : </b>' . $data->remarks . '<br>';
+
                     if ($data->creator) {
                         $button .= '<span class="text-muted"><b>Created By : </b>' . $data->creator->name . '</span>';
                     }
@@ -78,9 +81,9 @@ class SliderController extends Controller
                     if (Gate::allows('publisher')) {
 
                         if ($data->status == 1) {
-                            $button .= '<button type="button" id="' . $data->id . '" makeValue="0"  class="deactiveStatus btn btn-info btn-sm"><i class="fa fa-check-square-o"></i> Active</button>';
+                            $button .= '<button type="button" id="' . $data->id . '" makeValue="0"  class="deactiveStatus btn btn-info btn-sm"><i class="fas fa-check-square"></i> Active</button>';
                         } else {
-                            $button .= '<button type="button" id="' . $data->id . '" makeValue="1" class="activeStatus btn btn-warning btn-sm"> <i class="fa fa-window-close-o"></i> Deactive</button>';
+                            $button .= '<button type="button" id="' . $data->id . '" makeValue="1" class="activeStatus btn btn-warning btn-sm"> <i class="far fa-window-close"></i> Deactive</button>';
                         }
                     }
 
@@ -91,7 +94,7 @@ class SliderController extends Controller
 
 
                     if (Gate::allows('delete')) {
-                        $button .= '&nbsp;&nbsp;<button type="button" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>';
+                        $button .= '&nbsp;&nbsp;<button type="button" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>';
                     }
 
                     if (empty($button)) {
@@ -115,7 +118,10 @@ class SliderController extends Controller
         }
 
         $rules = array(
-            'image' => 'required|max:500|mimes:jpg,jpeg,png',
+            'image' => 'required|max:1000|mimes:jpg,jpeg,png',
+            'header' => 'required|max:20',
+            'remarks' => 'required|max:100',
+
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -129,7 +135,8 @@ class SliderController extends Controller
             $data = new Slider();
 
             $data->created_by = Auth::user()->id;
-
+            $data->header = $request->header;
+            $data->remarks = $request->remarks;
 
             $image = $request->file('image');
             if ($image) {
@@ -189,7 +196,9 @@ class SliderController extends Controller
         $id = $request->hidden_id;
 
         $rules = array(
-            'image' => 'nullable|max:500|mimes:jpg,jpeg,png',
+            'image' => 'nullable|max:1000|mimes:jpg,jpeg,png',
+            'header' => 'required|max:20',
+            'remarks' => 'required|max:100',
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -199,7 +208,8 @@ class SliderController extends Controller
         } else {
 
             $data = Slider::find($id);
-
+            $data->header = $request->header;
+            $data->remarks = $request->remarks;
             $data->created_by = Auth::user()->id;
             $data->updated_at = Carbon::now();
 

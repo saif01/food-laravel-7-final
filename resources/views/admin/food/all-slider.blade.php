@@ -92,6 +92,7 @@
                 {
                     data: 'details',
                     name: 'details',
+                    class: "text-left"
                 },
                 {
                     data: 'action',
@@ -121,6 +122,9 @@
         $('#sample_form').on('submit', function(event){
                 event.preventDefault();
                 var action_url = '';
+                 //After Submit Button Text
+                $('#action_button').val('Loading.....');
+                $('#action_button').prop("disabled", true);
 
                 if($('#action').val() == 'Add')
                 {
@@ -152,13 +156,18 @@
                                         html += '<li class="text-light">' + data.errors[count] + '</li>';
                                     }
                                     html += '</div>';
-
+                                    //Submit Button Text
+                                    if($('#action').val() == 'Add') {
+                                        $('#action_button').val('Add');
+                                    }else{
+                                        $('#action_button').val('Edit');
+                                    }
                                     //Show Validation
                                     $('#form_result').html(html);
                                 }
                             if(data.success)
                                 {
-
+                                    $('#action_button').prop("disabled", false);
                                     $('#sample_form')[0].reset();
                                     $('#formModal').modal('hide');
                                     $('#jsDataTable').DataTable().ajax.reload(null, false);
@@ -200,6 +209,8 @@
 
                     //console.log(data);
                     $('#hidden_id').val(id);
+                    $('#header').val(data.header);
+                    $('#remarks').val(data.remarks);
                     $('#image').val('');
                     $('#preview1').attr("src", "{{ asset('/') }}"+ data.image_small);
 
@@ -219,12 +230,9 @@
         });
 
 
-        //Define Delete ID
-        var delID;
-
         //Delete
         $(document).on('click', '.delete', function(){
-             delID = $(this).attr('id');
+            let delID = $(this).attr('id');
 
              Swal.fire({
                 title: 'Are you sure?',

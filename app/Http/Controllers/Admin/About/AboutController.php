@@ -12,6 +12,7 @@ use Validator;
 use Gate;
 use Auth;
 use Carbon\Carbon;
+use Image;
 
 
 class AboutController extends Controller
@@ -35,6 +36,14 @@ class AboutController extends Controller
 
                 ->addColumn('details', function ($data) {
                     $button = '';
+
+                    if (!empty($data->image_small)) {
+                        $button .= '<img src="' . asset($data->image_small) . '" class="rounded mx-auto d-block" height="70" width="200" >';
+                    } else {
+                        $button .= 'No Image';
+                    }
+
+                    $button .= '<b>Video Link : </b>' . $data->video_link . '<br>';
 
                     $button .= '<b>Details : </b>' . $data->details . '<br>';
 
@@ -108,6 +117,8 @@ class AboutController extends Controller
 
         $rules = array(
             'details'   =>  'required|min:3|max:20000',
+            'image'     => 'required|max:1000|mimes:jpg,jpeg,png',
+            'video_link' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -121,7 +132,34 @@ class AboutController extends Controller
             $data = new About();
 
             $data->details     =   $request->details;
+            $data->video_link  =   $request->video_link;
             $data->created_by  =   Auth::user()->id;
+
+            $image = $request->file('image');
+            if ($image) {
+                $image_name = Str::random(5);
+                $ext = strtolower($image->getClientOriginalExtension());
+                $image_full_name = $image_name . '.' . $ext;
+                //Small ImageUpload Path
+                $upload_path_small = 'public/images/about/small/';
+                $image_url_small = $upload_path_small . $image_full_name;
+
+                //Image Resize
+                $resize_image = Image::make($image->getRealPath());
+                $resize_image->resize(100, 100, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($upload_path_small . '/' . $image_full_name);
+
+                //Original Image Upload Path
+                $upload_path_original = 'public/images/about/original/';
+                $image_url_original = $upload_path_original . $image_full_name;
+
+                Image::make($image)->save($image_url_original);
+
+                //Data Store In DB Object
+                $data->image_small = $image_url_small;
+                $data->image = $image_url_original;
+            }
 
             $success = $data->save();
 
@@ -155,6 +193,8 @@ class AboutController extends Controller
 
         $rules = array(
             'details'   =>  'required|min:3|max:20000',
+            'image'     => 'nullable|max:1000|mimes:jpg,jpeg,png',
+            'video_link' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -165,9 +205,37 @@ class AboutController extends Controller
 
             $data = About::find($id);
 
-            $data->details     =   $request->details;
-            $data->created_by = Auth::user()->id;
-            $data->updated_at = Carbon::now();
+            $data->details    =   $request->details;
+            $data->video_link =   $request->video_link;
+            $data->created_by =   Auth::user()->id;
+            $data->updated_at =   Carbon::now();
+
+            $image = $request->file('image');
+            if ($image) {
+                $image_name = Str::random(5);
+                $ext = strtolower($image->getClientOriginalExtension());
+                $image_full_name = $image_name . '.' . $ext;
+                //Small ImageUpload Path
+                $upload_path_small = 'public/images/about/small/';
+                $image_url_small = $upload_path_small . $image_full_name;
+
+                //Image Resize
+                $resize_image = Image::make($image->getRealPath());
+                $resize_image->resize(100, 100, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($upload_path_small . '/' . $image_full_name);
+
+                //Original Image Upload Path
+                $upload_path_original = 'public/images/about/original/';
+                $image_url_original = $upload_path_original . $image_full_name;
+
+                Image::make($image)->save($image_url_original);
+
+                //Data Store In DB Object
+                $data->image_small = $image_url_small;
+                $data->image = $image_url_original;
+            }
+
 
 
             $success = $data->save();
@@ -189,7 +257,19 @@ class AboutController extends Controller
             return response()->json(['success' => 'Sorry !! You have no access.', 'icon' => 'error']);
         }
 
-        $data = About::findOrFail($id);
+        $data = About::find($id);
+
+        //Delete Image
+        $image_path = $data->image;
+        if (!empty($image_path)) {
+            //unlink(public_path($image_path));
+            unlink($image_path);
+        }
+        //Delete Small Image
+        $image_small_path = $data->image_small;
+        if (!empty($image_small_path)) {
+            unlink($image_small_path);
+        }
 
 
         $success = $data->delete();

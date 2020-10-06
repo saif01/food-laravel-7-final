@@ -126,7 +126,18 @@
                             </ul>
                         </li>
 
+                        @can('recomendation')
+                        <li class="has-sub nav-item"><a href="#"><i class="fa fa-clone yellow"></i><span class="menu-title">Recomendations</span></a>
+                            <ul class="menu-content">
+                                <li class="nav-item"><a href="{{ route('recomendation.franchisee') }}"><i class="fa fa-file info"></i><span class="menu-title">Franchisee</span></a></li>
 
+                                <li class="nav-item"><a href="{{ route('recomendation.message') }}"><i class="fa fa-file info"></i><span class="menu-title">Message</span></a></li>
+
+                            </ul>
+                        </li>
+                        @endcan
+
+                        @can('type')
                         <li class="has-sub nav-item"><a href="#"><i class="fa fa-clone yellow"></i><span class="menu-title">Product Type</span></a>
                             <ul class="menu-content">
                                 <li class="nav-item"><a href="{{ route('admin.category.all') }}"><i class="fa fa-file info"></i><span class="menu-title">Category All</span></a></li>
@@ -135,7 +146,7 @@
 
                             </ul>
                         </li>
-
+                        @endcan
 
 
 

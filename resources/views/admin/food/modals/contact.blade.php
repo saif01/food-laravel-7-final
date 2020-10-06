@@ -18,7 +18,7 @@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label class="control-label">Contact : </label>
-                            <input type="number" name="contact" id="contact" class="form-control" placeholder="Enter Contact Number" />
+                            <input type="text" name="contact" id="contact" class="form-control" placeholder="Enter Contact Number" />
                         </div>
 
                         <div class="col-md-6">

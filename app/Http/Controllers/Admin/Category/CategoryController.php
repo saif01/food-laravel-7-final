@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
 
         if (request()->ajax()) {
-            $data = Category::with('user')->get();
+            $data = Category::orderBy('id', 'asc')->with('user')->get();
 
 
             return DataTables::of($data)
@@ -78,11 +78,11 @@ class CategoryController extends Controller
         } else {
 
             //Make First capital
-            $rName = ucwords(strtolower($request->name));
+            //$rName = ucwords(strtolower($request->name));
 
             $data = new Category();
 
-            $data->name = $rName;
+            $data->name = $request->name;
             $data->created_by = Auth::user()->id;
             $success = $data->save();
 
@@ -128,11 +128,11 @@ class CategoryController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         } else {
 
-            $rName = ucwords(strtolower($request->name));
+            //$rName = ucwords(strtolower($request->name));
 
             $data = Category::findOrFail($id);
 
-            $data->name         = $rName;
+            $data->name         = $request->name;
             $data->created_by   = Auth::user()->id;
             $success            = $data->save();
 

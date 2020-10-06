@@ -19,6 +19,11 @@ Route::namespace('User')->group(function () {
         Route::get('/sub-area/{name}', 'OutlateController@SubArea')->name('user.outlate.subarea');
     });
 
+    Route::prefix('franchisee')->group(function () {
+        Route::get('/apply', 'FranchiseeController@apply')->name('user.franchisee.apply');
+        Route::post('/apply-action', 'FranchiseeController@apply_action')->name('user.franchisee.apply.action');
+    });
+
     //Route::get('/products', 'ForntendController@AllProducts');
 
     Route::get('/products-details/{id}', 'ForntendController@ProductsDetails');
@@ -169,14 +174,10 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
         Route::get('/delete/{id}', 'SliderController@Delete');
         Route::get('/status/{id}/{val}', 'SliderController@Status');
     });
-});
 
-
-
-Route::get('/clear', function () {
-    Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('config:cache');
-    Artisan::call('view:clear');
-    return "Cleared!";
+    //Recomendation
+    Route::namespace('Recomendation')->prefix('recomendation')->group(function () {
+        Route::get('/franchisee', 'FranchiseeController@Franchisee')->name('recomendation.franchisee');
+        Route::get('/message', 'MessageController@Message')->name('recomendation.message');
+    });
 });

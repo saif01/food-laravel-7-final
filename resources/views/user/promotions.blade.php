@@ -65,7 +65,7 @@
                     <div class="food-item-wrap">
                         <div class="figure-wrap bg-image zoom">
                             <img src="{{ asset($row->image) }}" height="211" width="392">
-                            <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                            {{-- <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div> --}}
                         </div>
                         <div class="content">
                             <h5><a href="{{ url('/promotion-details/'.$row->id) }}">{{ Str::limit($row->title, $limit = 30 ) }}</a></h5>

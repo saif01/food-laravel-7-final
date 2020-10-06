@@ -6,8 +6,7 @@
     <!-- start: Inner page hero -->
     <div class="inner-page-hero header-bg" >
         <div class="container">
-            <h2 class="text-white">Single Product Details...</h2>
-            <p class="lead text-white">We believe in better quality and service</p>
+            <h2 class="text-white">{{ $singleData->title }}</h2>
         </div>
         <!-- end:Container -->
     </div>
@@ -16,7 +15,7 @@
         <div class="container">
             <ul>
                 <li><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="{{ url('/products') }}">Product</a></li>
+                <li><a href="{{ url('/products/all') }}">Product</a></li>
                 <li class="text-danger">Product Details</li>
             </ul>
         </div>
@@ -88,7 +87,7 @@
         </div>
     </section>
 
-    <!-- How it works block starts -->
+    {{-- <!-- How it works block starts -->
     <section class="how-it-works">
         <div class="container">
             <div class="text-xs-center">
@@ -144,6 +143,6 @@
             </div>
         </div>
 </section>
-<!-- How it works block ends -->
+<!-- How it works block ends --> --}}
 
 @endsection

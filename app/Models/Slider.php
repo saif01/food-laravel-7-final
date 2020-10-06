@@ -8,7 +8,7 @@ use App\User;
 
 class Slider extends Model
 {
-    protected $fillable = ['image', 'image_small', 'status', 'published_by', 'created_by' ];
+    protected $fillable = ['image', 'image_small', 'header', 'remarks', 'status', 'published_by', 'created_by'];
 
 
     public function publisher()

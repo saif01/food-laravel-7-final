@@ -8,6 +8,7 @@
         margin-left: 12px;
         color: rgb(236, 54, 54);
     }
+    .form-group.required .control-label:after {content:"*"; color:red; font-weight: bold;}
 </style>
 @endpush
 
@@ -18,7 +19,6 @@
     <div class="inner-page-hero header-bg">
         <div class="container">
             <h2 class="text-white">Contact us</h2>
-            <p class="lead text-white">We believe in better quality and service</p>
         </div>
         <!-- end:Container -->
     </div>
@@ -38,10 +38,11 @@
         <div class="container">
             <div class="row my-2">
                 <div class="col-md-12">
-                    <div class="sidebar-title white-txt">
-                        <h6>Contact Us</h6> <i class="fas fa-utensils float-right"></i>
+                    <div class="row pb-3">
+                        <div class="sidebar-title white-txt">
+                            <h6>Contact Us</h6> <i class="fas fa-utensils float-right"></i>
+                        </div>
                     </div>
-
                     <div class="ml-3">
 
                         <span><b>Phone : </b> {{ $contactData->contact }} </span><br>
@@ -55,11 +56,13 @@
 
             <div class="row mt-5">
                 <div class="col-md-12">
-                    <div class="sidebar-title white-txt">
-                        <h6>If any query then writes down below, Please.</h6> <i class="fas fa-utensils float-right"></i>
+                    <div class="row pb-4">
+                        <div class="sidebar-title white-txt">
+                            <h6>If any query then writes down below, Please.</h6> <i class="fas fa-utensils float-right"></i>
+                        </div>
                     </div>
 
-                    <div class="pt-5">
+                    <div>
 
 
 
@@ -69,36 +72,40 @@
 
                             @csrf
 
-                            <div class="col-md-12 row pt-3">
+                            <div class="row">
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
+                                     <label class="control-label" >Name </label>
                                         <input type="text" name="name" class="form-control" placeholder="Please enter your name">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
+                                     <label class="control-label">Contact </label>
                                         <input type="text" name="contact" class="form-control" placeholder="Please enter your phone number">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
+                                        <label class="control-label">Email </label>
                                         <input type="email" name="email" class="form-control" placeholder="Please enter your email">
                                     </div>
                                 </div>
 
                             </div>
 
-                            <div class="col-md-12">
-                                <textarea type="text" name="details" class="form-control" id="details" placeholder="Please enter your query" ></textarea>
-                            </div>
-
-                            <div class="col-md-12 pt-2">
-
-                                <button type="submit" class="btn btn-success btn-block"><i class="fas fa-plus" aria-hidden="true"></i>
-                                    Submit your query</button>
-
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group required">
+                                        <label class="control-label">Message </label>
+                                        <textarea id="form_message" name="details" class="form-control" id="details" placeholder="Please enter your query" rows="4" ></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="submit" id="action_button" class="btn btn-success btn-block" value="Submit your query">
+                                </div>
                             </div>
 
                         </form>
@@ -126,7 +133,7 @@
 @endsection
 
 
-@section('page-js')
+@push('page-js')
 
 {{-- Tostar + Sweetalert 2 --}}
 <script src="{{ asset('all-assets/common/sweet-alert-2/sw-alert.js') }}" type="text/javascript"></script>
@@ -137,6 +144,9 @@
         //Form Submit
         $('#sample_form').on('submit', function(event) {
             event.preventDefault();
+            //After Submit Button Text
+            $('#action_button').val('Loading.....');
+            $('#action_button').prop("disabled", true);
 
             $.ajax({
                 url: "{{ route('contact.mail') }}",
@@ -155,12 +165,14 @@
                             html += '<li class="text-light">' + data.errors[count] + '</li>';
                         }
                         html += '</div>';
-
+                        $('#action_button').val('Submit your query');
+                        $('#action_button').prop("disabled", false);
                         //Show Validation
                         $('#form_result').html(html);
                     }
                     if (data.success) {
-
+                        $('#action_button').prop("disabled", false);
+                        $('#action_button').val('Submit your query');
                         $('#sample_form')[0].reset();
 
                         Swal.fire({
@@ -200,4 +212,4 @@
             });
 </script> --}}
 
-@endsection
+@endpush

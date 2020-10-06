@@ -7,8 +7,13 @@
     <!-- start: Inner page hero -->
     <div class="inner-page-hero header-bg" >
         <div class="container">
-            <h2 class="text-white">All Products</h2>
-            <p class="lead text-white">We believe in better quality and service</p>
+            <h2 class="text-white">
+                @if ($subcategory)
+                    {{ $subcategory }}
+                @else
+                    All
+                @endif
+            </h2>
         </div>
         <!-- end:Container -->
     </div>
@@ -18,7 +23,7 @@
         <div class="container">
             <ul>
                 <li><a href="{{ url('/') }}" class="active">Home</a></li>
-                <li class="text-danger">Products</li>
+                <li><a href="{{ url('/products/all') }}">Product</a></li>
                 @if ($category)
                      <li class="text-danger">{{ $category }}</li>
                 @endif
@@ -43,7 +48,7 @@
                     <div class="food-item-wrap">
                         <div class="figure-wrap bg-image zoom">
                             <img src="{{ asset($row->image) }}" height="211" width="392">
-                            <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                            {{-- <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div> --}}
                         </div>
                         <div class="content">
                             <h5><a href="{{ url('/products-details/'.$row->id) }}">{{ Str::limit($row->title, $limit = 30 ) }}</a></h5>

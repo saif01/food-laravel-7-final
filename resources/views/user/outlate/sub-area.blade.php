@@ -30,7 +30,7 @@
             <div class="inner-page-hero header-bg" >
                 <div class="container">
                    <h2 class="text-white">All CP Five Star Outlets</h2>
-                    <p class="lead text-white">We believe in better quality and service</p>
+
                 </div>
                 <!-- end:Container -->
             </div>

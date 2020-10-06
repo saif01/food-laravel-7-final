@@ -4,99 +4,70 @@
 
 
 @push('page-css')
-
-<link rel="stylesheet" href="{{ asset('all-assets/common/animate/css/animate.min.css') }}">
+<!--  Vegas Slider CSS -->
+<link rel="stylesheet" type="text/css" href="{{ asset('all-assets/user/assets/vegas/vegas.min.css') }}">
+<!-- Text Animated CSS -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Modak">
+<link href="{{ asset('all-assets/user/assets/textAnimate/animate.css') }}" rel="stylesheet">
 
 <style>
     .card {
         border: inherit;
         background-color: inherit;
     }
-
-    .carousel-item {
-        height: 100vh;
-        min-height: 350px;
-        background: no-repeat center center scroll;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-    }
-
-    .carousel-caption {
-        top: 30%;
-        left: 10%;
-    }
 </style>
 
 @endpush
 
 @push('page-js')
+<!-- Vegas Slider Js -->
+<script src="{{ asset('all-assets/user/assets/vegas/vegas.min.js') }}"></script>
+<!-- Animated Text JS -->
+<script src="{{ asset('all-assets/user/assets/textAnimate/jquery.lettering.js') }}"></script>
+<script src="{{ asset('all-assets/user/assets/textAnimate/jquery.textillate.js') }}"></script>
+<script src="{{ asset('all-assets/user/assets/textAnimate/animateOptions.js') }}"></script>
 
 <script>
-    $('.carousel').carousel({
-        interval: 5000,
-        loop: true,
-    })
+    // Home Page Two Slideshow
+    $("#slideslow-bg").vegas({
+        overlay: true,
+        transition: 'fade',
+        transitionDuration: 2000,
+        delay: 4000,
+        shuffle: true,
+        color: '#e51937',
+        animation: 'random',
+        animationDuration: 20000,
+        slides: [
+            @foreach($slider as $slide) {
+                src: "{{ asset( $slide->image) }}"
+            },
+            @endforeach
+        ]
+    }); //Home Page Two Slideshow
 </script>
-
-
 @endpush
 
 {{-- Main Content --}}
 @section('content')
 
-<section>
+<section class="hero bg-image" id="slideslow-bg" style="height: 100vh">
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-
-
-        <div class="carousel-inner">
-            @php
-            $isFirst = true;
-            @endphp
-            @foreach ($slider as $slide)
-
-            <div class="carousel-item {{ $isFirst ? ' active' : '' }} ">
-                <img src="{{ asset( $slide->image ) }}" alt="Slider Image">
-                <div class="carousel-caption text-center">
-                    <h1 class="brand-color display-3 font-weight-bold animate__animated animate__heartBeat">{{ $slide->header }}</h1>
-                    <p class="h3 text-light">{{ $slide->remarks }}</p>
-                </div>
-            </div>
-
-            @php
-            $isFirst = false;
-            @endphp
-
-            @endforeach
-
+    <div class="hero-inner">
+        <p class="tlt animated_text">CP Five Star</p>
+        <div class="container text-center hero-text font-white">
+            <h1 class="tlt" style="color:#fdbc56; text-shadow: 4px 4px 4px #e51937;">We Believe In Better Quality And Service</h1>
         </div>
-
-
-
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
-
+    <!--end:Hero inner -->
 </section>
 
 
 
 <section>
-    <div class="title text-center mt-5 pb-3">
+    <div class="title text-center mt-5">
         <h2>Our Promotional Products... <i class="fa fa-bullhorn brand-color" aria-hidden="true"></i></h2>
+        <p class="lead">These products are available in your nearest CP Five Star Outlet</p>
     </div>
     <div class="row" style="background-image: url({{ asset('all-assets/user/images/bg/img1.jpg') }}); background-size: cover;">
 
@@ -132,6 +103,7 @@
         <div class="title text-xs-center m-b-30">
             <h2>Latest Posts... <i class="far fa-newspaper brand-color float-right"></i>
             </h2>
+            <p class="lead">The easiest way to find your nearest CP Five Star Outlet</p>
         </div>
         <div class="row">
 
@@ -142,6 +114,7 @@
                 <div class="food-item-wrap">
                     <div class="figure-wrap bg-image zoom">
                         <img src="{{ asset($rowPost->image) }}" height="211" width="392">
+                        <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
                     </div>
                     <div class="content">
                         <h5><a href="{{ url('/posts-details/'.$rowPost->id) }}">{{ Str::limit($rowPost->title, $limit = 30 ) }}</a></h5>
@@ -166,6 +139,7 @@
         <div class="title text-xs-center m-b-30">
             <h2>Latest Products... <i class="fa fa-gift brand-color float-right"></i>
             </h2>
+            <p class="lead">The easiest way to find your nearest CP Five Star Outlet</p>
         </div>
         <div class="row">
             @foreach ($productData as $rowProduct )
@@ -174,6 +148,7 @@
                 <div class="food-item-wrap">
                     <div class="figure-wrap bg-image zoom">
                         <img src="{{ asset($rowProduct->image) }}" height="211" width="392">
+                        <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
                     </div>
                     <div class="content">
                         <h5><a href="{{ url('/products-details/'.$rowProduct->id) }}">{{ Str::limit($rowProduct->title, $limit = 30 ) }}</a></h5>

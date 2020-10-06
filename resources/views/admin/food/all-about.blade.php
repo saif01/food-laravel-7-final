@@ -1,6 +1,6 @@
 @extends('admin.layouts.food-master')
 
-@section('title', 'Admin Post Dashboard')
+@section('title', 'Admin About Dashboard')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('all-assets/common/export-datatable/css/1.10.21/dataTables.bootstrap4.min.css') }}">
@@ -140,6 +140,9 @@
         $('#sample_form').on('submit', function(event){
                 event.preventDefault();
                 var action_url = '';
+                 //After Submit Button Text
+                $('#action_button').val('Loading.....');
+                $('#action_button').prop("disabled", true);
 
                 if($('#action').val() == 'Add')
                 {
@@ -171,13 +174,19 @@
                                         html += '<li class="text-light">' + data.errors[count] + '</li>';
                                     }
                                     html += '</div>';
-
+                                    //Submit Button Text
+                                    if($('#action').val() == 'Add') {
+                                        $('#action_button').val('Add');
+                                    }else{
+                                        $('#action_button').val('Edit');
+                                    }
+                                    $('#action_button').prop("disabled", false);
                                     //Show Validation
                                     $('#form_result').html(html);
                                 }
                             if(data.success)
                                 {
-
+                                    $('#action_button').prop("disabled", false);
                                     $('#sample_form')[0].reset();
                                     $('#formModal').modal('hide');
                                     $('#jsDataTable').DataTable().ajax.reload(null, false);
@@ -219,8 +228,9 @@
 
                     //console.log(data);
                     $('#hidden_id').val(id);
-                    $('#contact').val(data.contact);
-                    $('#telephone').val(data.telephone);
+                    $('#video_link').val(data.video_link);
+                    $('#image').val('');
+                    $('#preview1').attr("src", "{{ asset('/') }}"+ data.image_small);
                     $('#details').summernote ('code', data.details);
 
                     $('.modal-title').text('Edit Record');
