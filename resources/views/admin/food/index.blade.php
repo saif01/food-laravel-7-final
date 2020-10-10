@@ -2,6 +2,10 @@
 
 @section('title', 'Admin Dashboard')
 
+@push('styles')
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('all-assets/admin/app-assets/vendors/css/chartist.min.css') }}"> --}}
+@endpush
+
 
 @section('content')
 
@@ -86,6 +90,96 @@
           </div>
         </div>
       </div>
+
+      <!-- Bar Chart -->
+<!-- Bar Chart -->
+
 </div>
 
+<div class="row mt-3">
+  <div class="col-sm-12">
+      <div class="card">
+          <div class="card-header card-header-top-line">
+              <h4 class="card-title text-center">Last twelve months user visits on website</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body chartjs">
+                  <canvas id="todayTepmMeasuredChart" width="400" height="150"></canvas>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> 
+
+
 @endsection
+
+
+@push('scripts')
+
+<!--Chart.js-->
+<script src="{{ asset('all-assets/common/Chart/Chart.min.js') }}"></script>
+
+
+<script>
+
+  var ctx2 = document.getElementById('todayTepmMeasuredChart').getContext('2d');
+  var myChart2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+          //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels: [
+                  @php 
+
+                  foreach ($bar_chart_data as $level )
+                  { 
+                    
+                   $lavel = date("F", mktime(0, 0, 0, $level->month, 1)).'-'.$level->year;
+                   
+                   echo '"'. $lavel .'"'.','; 
+                    
+                  }
+                   
+                  @endphp
+
+                  ],
+          datasets: [{
+              label: 'Total Visits',
+              data: [
+                      @php 
+                        foreach ($bar_chart_data as $data )
+                        { 
+                          echo '"'.$data->total.'"'.','; 
+                        } 
+                      @endphp
+                    ],
+              backgroundColor: [
+                                  @php
+                                    for ($i=0; $i <= $bar_chart_data->count(); $i++) {
+                                        echo  "'#". substr(md5(rand()), 0, 6)."',";
+                                        }
+                                  @endphp 
+                               ],
+              borderColor: [],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+
+
+
+    
+
+
+</script>
+    
+@endpush

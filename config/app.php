@@ -177,7 +177,8 @@ return [
 
         Yajra\DataTables\DataTablesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
+        Stevebauman\Location\LocationServiceProvider::class,
+       
     ],
 
     /*
@@ -232,7 +233,8 @@ return [
 
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Location' => 'Stevebauman\Location\Facades\Location',
+        
     ],
 
 ];

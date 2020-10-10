@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('all-assets/admin/app-assets/vendors/css/perfect-scrollbar.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('all-assets/admin/app-assets/vendors/css/prism.min.css') }}">
 
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('all-assets/admin/app-assets/css/app.min.css') }}"> --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('all-assets/admin/app-assets/css/modified.app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('all-assets/admin/app-assets/css/app.min.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('all-assets/admin/app-assets/css/modified.app.css') }}"> --}}
     <!-- END APEX CSS-->
 
 
@@ -123,6 +123,9 @@
 
                             @endcan
 
+                            @can('superuser')
+                                <li class="nav-item"><a href="{{ route('visitor.all') }}"><i class="fa fa-users green"></i><span class="menu-title">All Visitors</span></a></li>
+                            @endcan
                             </ul>
                         </li>
 
@@ -245,7 +248,7 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <!-- END Notification Sidebar-->
+    <!-- END Notification Sidebar--> 
 
 
 

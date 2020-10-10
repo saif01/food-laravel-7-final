@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::namespace('User')->group(function () {
+Route::namespace('User')->middleware('visitors')->group(function () {
 
     //Start User route
     Route::get('/', 'ForntendController@Index');
@@ -179,5 +179,11 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
     Route::namespace('Recomendation')->prefix('recomendation')->group(function () {
         Route::get('/franchisee', 'FranchiseeController@Franchisee')->name('recomendation.franchisee');
         Route::get('/message', 'MessageController@Message')->name('recomendation.message');
+    });
+
+    //Visitor
+    Route::namespace('Visitor')->prefix('visitor')->group(function () {
+        Route::get('/all', 'VisitorController@All')->name('visitor.all');
+
     });
 });

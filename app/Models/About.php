@@ -8,7 +8,7 @@ use App\User;
 
 class About extends Model
 {
-    protected $fillable = ['contact', 'teliphone', 'details', 'status', 'published_by', 'created_by' ];
+    protected $fillable = ['video_link', 'image', 'image_small', 'details', 'status', 'published_by', 'created_by' ];
 
     public function publisher()
     {

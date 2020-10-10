@@ -15,6 +15,9 @@ class CreateAboutsTable extends Migration
     {
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
+            $table->string('video_link')->nullable();
+            $table->string('image')->nullable();
+            $table->string('image_small')->nullable();
             $table->text('details')->nullable();
             $table->string('status')->nullable();
             $table->string('published_by')->nullable();
