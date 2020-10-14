@@ -96,12 +96,12 @@
                 },
                 {
                     data: 'details',
-                    name: 'details',
+                    custom: 'details',
                     "class": "text-left"
                 },
                 {
                     data: 'roles',
-                    name: 'roles'
+                    custom: 'roles'
                 },
 
                 {

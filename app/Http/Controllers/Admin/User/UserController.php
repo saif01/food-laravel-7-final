@@ -29,7 +29,7 @@ class UserController extends Controller
     {
 
         if (request()->ajax()) {
-            $data = User::with('roles')->latest('id');
+            $data = User::with('roles')->get();
 
             //dd($data);
 

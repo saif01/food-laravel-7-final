@@ -15,18 +15,33 @@
 
     .carousel-item {
         height: 100vh;
-        min-height: 350px;
-        background: no-repeat center center scroll;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
         background-size: cover;
+        background-position: center center;
     }
 
-    .carousel-caption {
-        top: 30%;
-        left: 10%;
+    .carousel-item{
+        margin: 0;
+        color: white;
     }
+
+    .carousel-indicators > .active {
+        background-color:red;
+    }
+    .carousel-caption h1{
+        color:red;
+    }
+    .carousel-caption {
+        background: rgba(0, 0, 0, 0.35);
+        top: 50%;
+        transform: translateY(-50%);
+        bottom: initial;
+        
+    }
+
+    .custom-font{
+        font-family: 'Sansita Swashed', cursive !important;
+    }
+
 </style>
 
 @endpush
@@ -63,10 +78,10 @@
             @foreach ($slider as $slide)
 
             <div class="carousel-item {{ $isFirst ? ' active' : '' }} ">
-                <img src="{{ asset( $slide->image ) }}" alt="Slider Image">
+                <img class="d-block mx-auto" src="{{ asset( $slide->image ) }}" alt="Slider Image">
                 <div class="carousel-caption text-center">
-                    <h1 class="brand-color display-3 font-weight-bold animate__animated animate__heartBeat">{{ $slide->header }}</h1>
-                    <p class="h3 text-light">{{ $slide->remarks }}</p>
+                    <h1 class="display-3 font-weight-bold animate__animated animate__heartBeat custom-font" >{{ $slide->header }}</h1>
+                    <p class="h3 text-light custom-font" >{{ $slide->remarks }}</p>
                 </div>
             </div>
 
@@ -145,7 +160,10 @@
                     </div>
                     <div class="content">
                         <h5><a href="{{ url('/posts-details/'.$rowPost->id) }}">{{ Str::limit($rowPost->title, $limit = 30 ) }}</a></h5>
-                        <div class="product-name min-height"> {!! Str::limit($rowPost->details, $limit = 300, $end = '......') !!} <a href="{{ url('/posts-details/'.$rowPost->id) }}"> Read More.</a></div>
+                        <div class="product-name min-height">
+                              {!! substr(strip_tags($rowPost->details), 0, 300) !!} 
+                            <a href="{{ url('/posts-details/'.$rowPost->id) }}"> ...... Read More.</a>
+                        </div>
 
                         <div class="price-btn-block"> <span class="price"></span> <a href="{{ url('/posts-details/'.$rowPost->id) }}" class="btn theme-btn-dash float-right"><i class="fa fa-eye" aria-hidden="true"></i> View Details</a> </div>
                     </div>
@@ -177,7 +195,10 @@
                     </div>
                     <div class="content">
                         <h5><a href="{{ url('/products-details/'.$rowProduct->id) }}">{{ Str::limit($rowProduct->title, $limit = 30 ) }}</a></h5>
-                        <div class="product-name min-height"> {!! Str::limit($rowProduct->details, $limit = 300, $end = '......') !!} <a href="{{ url('/products-details/'.$rowProduct->id) }}"> Read More.</a></div>
+                        <div class="product-name min-height">
+                            {!! substr(strip_tags($rowPost->details), 0, 300) !!} 
+                            <a href="{{ url('/products-details/'.$rowProduct->id) }}"> ...... Read More.</a>
+                        </div>
 
                         <div class="price-btn-block"> <span class="price">{{ $rowProduct->price }}/= Taka</span> <a href="{{ url('/products-details/'.$rowProduct->id) }}" class="btn theme-btn-dash float-right"><i class="fa fa-eye"></i> View Details</a> </div>
                     </div>

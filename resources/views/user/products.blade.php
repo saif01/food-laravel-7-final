@@ -52,7 +52,10 @@
                         </div>
                         <div class="content">
                             <h5><a href="{{ url('/products-details/'.$row->id) }}">{{ Str::limit($row->title, $limit = 30 ) }}</a></h5>
-                            <div class="product-name min-height"> {!! Str::limit($row->details, 300, '......') !!} <a href="{{ url('/products-details/'.$row->id) }}"> Read More.</a></div>
+                            <div class="product-name min-height">
+                                {!! substr(strip_tags($row->details), 0, 300) !!} 
+                                <a href="{{ url('/products-details/'.$row->id) }}"> Read More.</a>
+                            </div>
 
                             <div class="price-btn-block"> <span class="price">{{ $row->price }}/= Taka</span> <a href="{{ url('/products-details/'.$row->id) }}" class="btn theme-btn-dash float-right"><i class="fa fa-eye" aria-hidden="true"></i> View Details</a> </div>
                         </div>

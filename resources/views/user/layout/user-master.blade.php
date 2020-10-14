@@ -11,6 +11,7 @@
     <title>@yield('title')</title>
     <!-- Bootstrap core CSS -->
     <link href="https://fonts.googleapis.com/css2?family=El+Messiri&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap" rel="stylesheet">
     <link href="{{ asset('all-assets/common/bootstrap-4.5/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('all-assets/common/fontawesom5.7/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('all-assets/user/css/animsition.min.css') }}" rel="stylesheet">
@@ -23,12 +24,12 @@
     <link href="{{ asset('all-assets/common/scroll-top/css/back-to-top.css') }}" rel="stylesheet">
 
     <style>
+        body,html{font-family:'El Messiri',sans-serif!important}
         .header-bg {
             background-image: url("{{ asset('all-assets/user/images/bg/bg-blure.jpg') }}");
             max-height: 150px;
             margin-top: -15px;
         }
-
         .brand-color {
             color: #e51937;
         }
