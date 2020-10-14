@@ -25,6 +25,7 @@
                         <table id="jsDataTable" class="table table-striped table-bordered text-center">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Register</th>
                                     <th>IP Address</th>
                                     <th>OS Virson</th>
@@ -75,11 +76,15 @@
             serverSide: true,
             pagingType: "full_numbers",
             stateSave: true,
-
+            order: [[ 1, "desc" ]],
             ajax: {
                 url: "\all",
             },
             columns: [
+                {
+                    data: 'id',
+                    name: 'id',
+                },
                 {
                     data: 'register',
                     custom: 'register',

@@ -21,7 +21,9 @@ class VisitorController extends Controller
     {
 
         if (request()->ajax()) {
-            $data = Visitor::orderBy('id', 'desc')->get();
+            $data = Visitor::orderBy('id', 'desc')
+            ->take(1000)
+            ->get();
 
             //dd($data);
 
@@ -29,7 +31,8 @@ class VisitorController extends Controller
 
 
             ->addColumn('register', function ($data) {
-                return date("F j, Y h:m:s A", strtotime($data->created_at));
+                //return date("F j, Y h:m:s A", strtotime($data->created_at));
+                return date("F j, Y", strtotime($data->created_at));
             })
 
             ->rawColumns(['register'])
