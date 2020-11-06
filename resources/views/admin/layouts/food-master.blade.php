@@ -145,7 +145,7 @@
                             <ul class="menu-content">
                                 <li class="nav-item"><a href="{{ route('admin.category.all') }}"><i class="fa fa-file info"></i><span class="menu-title">Category All</span></a></li>
 
-                                <li class="nav-item"><a href="{{ route('admin.subcategory.all') }}"><i class="fa fa-file info"></i><span class="menu-title">SubCategory All</span></a></li>
+                                {{-- <li class="nav-item"><a href="{{ route('admin.subcategory.all') }}"><i class="fa fa-file info"></i><span class="menu-title">SubCategory All</span></a></li> --}}
 
                             </ul>
                         </li>

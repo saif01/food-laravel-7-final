@@ -11,7 +11,8 @@ Route::namespace('User')->middleware('visitors')->group(function () {
 
     Route::prefix('products')->group(function () {
         Route::get('/all', 'ProductController@AllProducts')->name('user.all.products');
-        Route::get('/sub/{id}', 'ProductController@SubProducts')->name('user.sub.products');
+        //Route::get('/sub/{id}', 'ProductController@SubProducts')->name('user.sub.products');
+        Route::get('/cat/{id}', 'ProductController@CatProducts')->name('user.cat.products');
     });
 
     Route::prefix('outlet')->group(function () {
@@ -64,11 +65,11 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
 
     //Role
     Route::namespace('Role')->prefix('role')->group(function () {
-        Route::get('/all', 'Rolecontroller@All')->name('role.all');
-        Route::post('/store', 'Rolecontroller@Store');
-        Route::get('/edit/{id}', 'Rolecontroller@Edit');
-        Route::post('/update', 'Rolecontroller@Update');
-        Route::get('/delete/{id}', 'Rolecontroller@Delete');
+        Route::get('/all', 'RoleController@All')->name('role.all');
+        Route::post('/store', 'RoleController@Store');
+        Route::get('/edit/{id}', 'RoleController@Edit');
+        Route::post('/update', 'RoleController@Update');
+        Route::get('/delete/{id}', 'RoleController@Delete');
     });
 
     //Category

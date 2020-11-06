@@ -39,24 +39,6 @@
                                     <th>Longitude</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($all_data as $data)
-                                    <tr>
-                                        <td>{{ $data->id }}</td>
-                                        <td>{{  date("F j, Y", strtotime($data->created_at)) }}</td>
-                                        <td>{{ $data->ip }}</td>
-                                        <td>{{ $data->os }}</td>
-                                        <td>{{ $data->browser }}</td>
-                                        <td>{{ $data->device }}</td>
-                                        <td>{{ $data->country_name }}</td>
-                                        <td>{{ $data->region_name }}</td>
-                                        <td>{{ $data->city_name }}</td>
-                                        <td>{{ $data->zip_code }}</td>
-                                        <td>{{ $data->latitude }}</td>
-                                        <td>{{ $data->longitude }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
 
 
                         </table>
@@ -88,9 +70,67 @@
 
         //All Data
         $('#jsDataTable').DataTable({
+            language: {
+                processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw green"></i><span class="sr-only">Loading...</span> '},
+            processing: true,
+            serverSide: true,
             pagingType: "full_numbers",
             stateSave: true,
             order: [[ 1, "desc" ]],
+            ajax: {
+                url: "\all",
+            },
+            columns: [
+                {
+                    data: 'id',
+                    name: 'id',
+                },
+                {
+                    data: 'register',
+                    custom: 'register',
+                },
+                {
+                    data: 'ip',
+                    name: 'ip',
+                },
+                {
+                    data: 'os',
+                    name: 'os',
+                },
+                {
+                    data: 'browser',
+                    name: 'browser',
+                },
+                {
+                    data: 'device',
+                    name: 'device',
+                },
+                {
+                    data: 'country_name',
+                    name: 'country_name',
+                },
+                {
+                    data: 'region_name',
+                    name: 'region_name',
+                },
+                {
+                    data: 'city_name',
+                    name: 'city_name',
+                },
+                {
+                    data: 'zip_code',
+                    name: 'zip_code',
+                },
+                {
+                    data: 'latitude',
+                    name: 'latitude',
+                },
+                {
+                    data: 'longitude',
+                    name: 'longitude',
+                },
+                
+            ]
         });
 
 

@@ -19,11 +19,19 @@ class VisitorController extends Controller
     //All Data
     public function All()
     {
+        $all_data = Visitor::orderBy('id', 'desc')
+        ->take(1000)
+        ->get();
+        // dd($data);   
 
         if (request()->ajax()) {
-            $data = Visitor::orderBy('id', 'desc')
-            ->take(1000)
+
+            $data = Visitor::take(1000)
             ->get();
+
+            // $data = Visitor::orderBy('id', 'desc')
+            // ->take(1000)
+            // ->get();
 
             //dd($data);
 
@@ -39,6 +47,6 @@ class VisitorController extends Controller
             ->make(true);
             
         }
-        return view('admin.food.visitors');
+        return view('admin.food.visitors', compact('all_data'));
     }
 }

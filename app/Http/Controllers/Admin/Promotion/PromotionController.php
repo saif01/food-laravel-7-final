@@ -27,7 +27,7 @@ class PromotionController extends Controller
     {
 
         if (request()->ajax()) {
-            $data = Promotion::with('publisher', 'creator')->latest('id');
+            $data = Promotion::with('publisher', 'creator')->get();
 
             //dd($data);
 
@@ -36,11 +36,11 @@ class PromotionController extends Controller
                 ->addColumn('ImgSrc', function ($data) {
                     $button = '';
                     if (!empty($data->image_small)) {
-                        $button = '<img src="' . asset($data->image_small) . '" class="rounded mx-auto d-block" height="150" width="200" >';
+                        $button .= '<img src="' . asset($data->image_small) . '" class="rounded mx-auto d-block" height="100" width="200" >';
                     } else {
-                        $button = 'No Image';
+                        $button .= 'No Image';
                     }
-
+                   
                     return $button;
                 })
 
@@ -48,6 +48,7 @@ class PromotionController extends Controller
                 ->addColumn('details', function ($data) {
                     $button = '';
                     $button .= '<b>Title : </b>' . $data->title . '<br>';
+                    $button .= '<b>Header : </b>' . $data->header . '<br>';
                     $button .= '<b>Price : </b> <del>' . $data->price_old . '</del> To <ins>' . $data->price_new . '</ins>/= Taka.<br>';
 
                     $button .= '<b>Details : </b>' . $data->details . '<br>';
@@ -121,6 +122,7 @@ class PromotionController extends Controller
 
         $rules = array(
             'title'        =>  'required|unique:promotions|min:3|max:300',
+            'header'       =>  'required|min:3|max:200',
             'price_new'    =>  'required',
             'price_old'    =>  'required',
             'details'      =>  'required|min:3|max:20000',
@@ -138,6 +140,7 @@ class PromotionController extends Controller
             $data = new Promotion();
 
             $data->title        =   $request->title;
+            $data->header       =   $request->header;
             $data->details      =   $request->details;
             $data->price_new    =   $request->price_new;
             $data->price_old    =   $request->price_old;
@@ -203,11 +206,12 @@ class PromotionController extends Controller
         $id = $request->hidden_id;
 
         $rules = array(
-            'title'    =>  'required|min:3|max:300|unique:promotions,title,' . $id,
-            'price_new'    =>  'required',
-            'price_old'    =>  'required',
-            'details'    =>  'required|min:3|max:20000',
-            'image' => 'nullable|max:500|mimes:jpg,jpeg,png',
+            'title'         =>  'required|min:3|max:300|unique:promotions,title,' . $id,
+            'header'        =>  'required|min:3|max:200',
+            'price_new'     =>  'required',
+            'price_old'     =>  'required',
+            'details'       =>  'required|min:3|max:20000',
+            'image'         =>  'nullable|max:500|mimes:jpg,jpeg,png',
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -219,11 +223,12 @@ class PromotionController extends Controller
             $data = Promotion::find($id);
 
             $data->title        =   $request->title;
+            $data->header       =   $request->header;
             $data->details      =   $request->details;
             $data->price_new    =   $request->price_new;
             $data->price_old    =   $request->price_old;
-            $data->created_by = Auth::user()->id;
-            $data->updated_at = Carbon::now();
+            $data->created_by   =   Auth::user()->id;
+            $data->updated_at   =   Carbon::now();
 
 
             $image = $request->file('image');

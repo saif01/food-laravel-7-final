@@ -16,8 +16,9 @@ class CreatePromotionsTable extends Migration
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->text('image')->nullable();
-            $table->text('image_small')->nullable();
+            $table->string('header')->nullable();
+            $table->string('image')->nullable();
+            $table->string('image_small')->nullable();
             $table->string('price_old')->nullable();
             $table->string('price_new')->nullable();
             $table->text('details')->nullable();

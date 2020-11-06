@@ -7,7 +7,6 @@
     <div class="inner-page-hero header-bg" >
         <div class="container">
             <h2 class="text-white">Our Outlets</h2>
-            <p class="lead text-white">We believe in better quality and service</p>
         </div>
         <!-- end:Container -->
     </div>

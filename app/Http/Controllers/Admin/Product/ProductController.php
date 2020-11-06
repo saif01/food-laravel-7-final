@@ -33,7 +33,7 @@ class ProductController extends Controller
         $categories = Category::orderBy('name')->get();
 
         if (request()->ajax()) {
-            $data = Product::with('category', 'subcategory', 'publisher', 'creator')->orderBy('id', 'desc')->get();
+            $data = Product::with('category', 'publisher', 'creator')->orderBy('id', 'desc')->get();
 
             //dd($data);
 
@@ -68,11 +68,11 @@ class ProductController extends Controller
                         $button .= '<b>Category : </b> <span class="text-danger" >Not Found</span> <br>';
                     }
 
-                    if ($data->subcategory) {
-                        $button .= '<b>Subcategory : </b>' . $data->subcategory->name . '<br>';
-                    } else {
-                        $button .= '<b>Subcategory : </b> <span class="text-danger" > Not Found</span> <br>';
-                    }
+                    // if ($data->subcategory) {
+                    //     $button .= '<b>Subcategory : </b>' . $data->subcategory->name . '<br>';
+                    // } else {
+                    //     $button .= '<b>Subcategory : </b> <span class="text-danger" > Not Found</span> <br>';
+                    // }
 
                     $button .= '<br><b>Details : </b>' . $data->details . '<br>';
 
@@ -155,7 +155,7 @@ class ProductController extends Controller
             'title'     =>  'required|unique:products|min:3|max:300',
             'price'     =>  'required',
             'cat_id'    =>  'required',
-            'sub_id'    =>  'required',
+            //'sub_id'    =>  'required',
             'details'   =>  'required|min:3|max:20000',
             'image'     =>  'required|max:500|mimes:jpg,jpeg,png',
             'image2'    =>  'required|max:500|mimes:jpg,jpeg,png',
@@ -175,7 +175,7 @@ class ProductController extends Controller
             $data->title    =   $request->title;
             $data->price    =   $request->price;
             $data->cat_id    =   $request->cat_id;
-            $data->sub_id    =   $request->sub_id;
+            //$data->sub_id    =   $request->sub_id;
             $data->details    =   $request->details;
             $data->created_by = Auth::user()->id;
 
@@ -304,7 +304,7 @@ class ProductController extends Controller
             'title'    =>  'required|min:3|max:300|unique:products,title,' . $id,
             'price'    =>  'required',
             'cat_id'   =>  'required',
-            'sub_id'   =>  'required',
+            //'sub_id'   =>  'required',
             'details'  =>  'required|min:3|max:20000',
             'image'    =>  'nullable|max:500|mimes:jpg,jpeg,png',
             'image2'   =>  'nullable|max:500|mimes:jpg,jpeg,png',
@@ -322,7 +322,7 @@ class ProductController extends Controller
             $data->title    =   $request->title;
             $data->price    =   $request->price;
             $data->cat_id   =   $request->cat_id;
-            $data->sub_id   =   $request->sub_id;
+            //$data->sub_id   =   $request->sub_id;
             $data->details    = $request->details;
             $data->created_by = Auth::user()->id;
             $data->updated_at = Carbon::now();

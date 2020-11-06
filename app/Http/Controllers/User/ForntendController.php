@@ -103,9 +103,9 @@ class ForntendController extends Controller
     {
         $contactData = Contact::where('status', '1')
             ->orderBy('id', 'desc')
-            ->take(1)
-            ->first();
-        return view('user.contact', \compact('contactData'));
+            ->get();
+
+        return view('user.contact', compact('contactData'));
     }
 
     //ContactMail

@@ -45,10 +45,15 @@
                     </div>
                     <div class="ml-3">
 
-                        <span><b>Phone : </b> {{ $contactData->contact }} </span><br>
-                        <span><b>Telephone : </b> {{ $contactData->telephone }} </span><br>
-                        <span><b>E-mail : </b> {{ $contactData->email }} </span><br>
-                        <span><b>Address : </b> {{ $contactData->address }} </span>
+                        @foreach ($contactData as $item)
+
+                            <span><b>Phone : </b> {{ $item->contact }} </span><br>
+                            <span><b>Telephone : </b> {{ $item->telephone }} </span><br>
+                            <span><b>E-mail : </b> {{ $item->email }} </span><br>
+                            <span><b>Address : </b> {{ $item->address }} </span>
+                            <hr>
+                    
+                        @endforeach
 
                     </div>
                 </div>

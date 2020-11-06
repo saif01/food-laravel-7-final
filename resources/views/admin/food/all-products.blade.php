@@ -64,15 +64,11 @@
 
 <!-- Summernote JS -->
 <script src="{{ asset('all-assets/admin/app-assets/custom/summernote/summernote-lite.js') }}"></script>
-<!-- Modal Show-->
-<script src="{{ asset('all-assets/admin/app-assets/js/components-modal.min.js') }}" type="text/javascript"></script>
-{{-- Tostar + Sweetalert 2 --}}
-<script src="{{ asset('all-assets/common/sweet-alert-2/sw-alert.js') }}" type="text/javascript"></script>
 
 
 <script type="text/javascript">
 
-
+(function( $ ) {
     $(document).ready(function(){
 
 
@@ -109,21 +105,23 @@
             columns: [
                 {
                     data: 'ImgSrc',
-                    name: 'ImgSrc',
-                    "width": "15%"
+                    custom: 'ImgSrc',
+                    width: "15%",
+                    orderable: false,
+                    searchable: false,
                 },
                 {
                     data: 'details',
-                    name: 'details',
-                    "class": "text-left"
+                    custom: 'details',
+                    class: "text-left"
                 },
 
                 {
                     data: 'action',
-                    name: 'action',
+                    custom: 'action',
                     orderable: false,
-                    "searchable": false,
-                    "width": "10%"
+                    searchable: false,
+                    width: "10%"
 
                 }
             ]
@@ -145,20 +143,20 @@
 
 
         //Fetch App Subcategory
-        $("#Category").on("change", function() {
-            var cat_id = $(this).val();
-            jQuery.ajax({
-                url: "{{ route('product.subcategory') }}",
-                type: "GET",
-                data: { cat_id: cat_id },
-                success: function(data) {
-                    $('#SubCategory').empty();
-                    $.each(data, function(index, subcatObj){
-                    $('#SubCategory').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option> ');
-                    });
-                }
-            });
-        });
+        // $("#Category").on("change", function() {
+        //     var cat_id = $(this).val();
+        //     jQuery.ajax({
+        //         url: "{{ route('product.subcategory') }}",
+        //         type: "GET",
+        //         data: { cat_id: cat_id },
+        //         success: function(data) {
+        //             $('#SubCategory').empty();
+        //             $.each(data, function(index, subcatObj){
+        //             $('#SubCategory').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option> ');
+        //             });
+        //         }
+        //     });
+        // });
 
 
         //Form Submit
@@ -260,7 +258,7 @@
                     $('#title').val(data.main.title);
                     $('#price').val(data.main.price);
                     $('#Category').val(data.main.cat_id);
-                    $('#SubCategory').append('<option value=" '+data.subcategory.id+' ">'+data.subcategory.name+'</option>');
+                    //$('#SubCategory').append('<option value=" '+data.subcategory.id+' ">'+data.subcategory.name+'</option>');
                     $('#details').summernote ('code', data.main.details);
                     $('#preview1').attr("src", "{{ asset('/') }}"+ data.main.image_small);
                     $('#preview2').attr("src", "{{ asset('/') }}"+ data.main.image2_small);
@@ -282,12 +280,10 @@
         });
 
 
-        //Define Delete ID
-        var delID;
 
         //Delete
         $(document).on('click', '.delete', function(){
-             delID = $(this).attr('id');
+            let delID = $(this).attr('id');
 
              Swal.fire({
                 title: 'Are you sure?',
@@ -392,12 +388,10 @@
         });
 
 
-
-
-
-
-
     });
+
+
+})(jQuery);
 
 
 

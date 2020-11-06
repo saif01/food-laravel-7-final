@@ -13,7 +13,7 @@
         background-color: inherit;
     }
 
-    .carousel-item {
+    /* .carousel-item {
         height: 100vh;
         background-size: cover;
         background-position: center center;
@@ -29,18 +29,42 @@
     }
     .carousel-caption h1{
         color:red;
-    }
-    .carousel-caption {
+    } */
+    /* .carousel-caption {
         background: rgba(0, 0, 0, 0.35);
         top: 50%;
         transform: translateY(-50%);
         bottom: initial;
         
-    }
+    } */
 
     .custom-font{
         font-family: 'Sansita Swashed', cursive !important;
     }
+
+    .carousel-item {
+        max-height: 100vh;
+        background-size: cover;
+        background-position: center center;
+    }
+    /* .carousel-caption {
+        background: rgba(0, 0, 0, 0.35);
+         top: 50%;
+        transform: translateY(-50%);
+        bottom: initial; 
+        
+    } */
+
+
+    /* .carousel-item .img-fluid {
+  width:100%;
+  height:100%;
+} */
+
+/* .img-fluid {
+    max-width: 100%;
+    height: auto;
+} */
 
 </style>
 
@@ -78,10 +102,10 @@
             @foreach ($slider as $slide)
 
             <div class="carousel-item {{ $isFirst ? ' active' : '' }} ">
-                <img class="d-block mx-auto" src="{{ asset( $slide->image ) }}" alt="Slider Image">
+                <img class="img-fluid" src="{{ asset( $slide->image ) }}" alt="Slider Image">
                 <div class="carousel-caption text-center">
-                    <h1 class="display-3 font-weight-bold animate__animated animate__heartBeat custom-font" >{{ $slide->header }}</h1>
-                    <p class="h3 text-light custom-font" >{{ $slide->remarks }}</p>
+                    <p class="h1 font-weight-bold animate__animated animate__heartBeat custom-font" style="color:{{ $slide->favcolor }} !important"  >{{ $slide->header }}</p>
+                    <p class="h5 text-light custom-font" style="color:{{ $slide->favcolor }} !important">{{ $slide->remarks }}</p>
                 </div>
             </div>
 

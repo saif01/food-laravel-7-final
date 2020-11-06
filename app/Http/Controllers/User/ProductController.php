@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\Subcategory;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -19,9 +20,8 @@ class ProductController extends Controller
             ->paginate(6);
 
         $category = '';
-        $subcategory = '';
 
-        return view('user.products', compact('allData', 'category', 'subcategory'));
+        return view('user.products', compact('allData', 'category'));
     }
 
     //SubProducts
@@ -39,4 +39,24 @@ class ProductController extends Controller
 
         return view('user.products', compact('allData', 'category', 'subcategory'));
     }
+
+    //CatProducts
+    public function CatProducts($cat_id)
+    {
+        $allData = Product::where('status', '1')
+            ->where('cat_id', $cat_id)
+            ->latest('id')
+            ->paginate(6);
+
+    
+        $category = Category::find($cat_id);
+
+        //dd($category);
+
+        // echo $category;
+        // exit();
+
+        return view('user.products', compact('allData', 'category'));
+    }
+
 }

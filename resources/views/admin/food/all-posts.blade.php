@@ -63,15 +63,11 @@
 
 <!-- Summernote JS -->
 <script src="{{ asset('all-assets/admin/app-assets/custom/summernote/summernote-lite.js') }}"></script>
-<!-- Modal Show-->
-<script src="{{ asset('all-assets/admin/app-assets/js/components-modal.min.js') }}" type="text/javascript"></script>
-{{-- Tostar + Sweetalert 2 --}}
-<script src="{{ asset('all-assets/common/sweet-alert-2/sw-alert.js') }}" type="text/javascript"></script>
 
 
 <script type="text/javascript">
 
-
+(function( $ ) {
     $(document).ready(function(){
 
 
@@ -101,28 +97,29 @@
             pagingType: "full_numbers",
             stateSave: true,
 
-
             ajax: {
                 url: "\all",
             },
             columns: [
                 {
                     data: 'ImgSrc',
-                    name: 'ImgSrc',
-                    "width": "15%"
+                    custom: 'ImgSrc',
+                    width: "15%",
+                    orderable: false,
+                    searchable: false,
                 },
                 {
                     data: 'details',
-                    name: 'details',
-                    "class": "text-left"
+                    custom: 'details',
+                    class: "text-left"
                 },
 
                 {
                     data: 'action',
-                    name: 'action',
+                    custom: 'action',
                     orderable: false,
-                    "searchable": false,
-                    "width": "10%"
+                    searchable: false,
+                    width: "10%"
 
                 }
             ]
@@ -225,7 +222,7 @@
                     //console.log(data);
                     $('#hidden_id').val(id);
                     $('#title').val(data.title);
-                    //$('#details').val(data.details);
+                    $('#header').val(data.header);
                     $('#details').summernote ('code', data.details);
                     $('#image').val('');
                     $('#preview1').attr("src", "{{ asset('/') }}"+ data.image_small);
@@ -356,12 +353,9 @@
         });
 
 
-
-
-
-
-
     });
+
+})(jQuery);
 
 
 

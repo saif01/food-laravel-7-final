@@ -3,7 +3,16 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('all-assets/common/export-datatable/css/1.10.21/dataTables.bootstrap4.min.css') }}">
-
+<style>
+    .simpleColorChooser{
+        z-index: 1;
+        border: 1px solid #A6A9AE !important; 
+    }
+    .simpleColorDisplay{
+        border-radius: 0.25rem;
+        padding: 0.375rem 0.75rem;
+    }
+</style>
 @endpush
 
 
@@ -35,7 +44,6 @@
                                 </tr>
                             </thead>
 
-
                         </table>
                     </div>
                 </div>
@@ -63,6 +71,20 @@
 <script src="{{ asset('all-assets/admin/app-assets/js/components-modal.min.js') }}" type="text/javascript"></script>
 {{-- Tostar + Sweetalert 2 --}}
 <script src="{{ asset('all-assets/common/sweet-alert-2/sw-alert.js') }}" type="text/javascript"></script>
+{{-- query-simple-color picker --}}
+<script src="{{ asset('all-assets/common/color-picker/js/jquery-simple-color.js') }}" type="text/javascript"></script>
+
+
+<script>
+ $('.simple_color').simpleColor({
+    cellWidth: 15,
+    cellHeight: 15,
+    border: '1px solid #A6A9AE',
+    boxWidth: '100%',
+    boxHeight: 'calc(1.5em + 0.75rem + 2px)',
+   
+});
+</script>
 
 
 <script type="text/javascript">
@@ -211,6 +233,7 @@
                     $('#hidden_id').val(id);
                     $('#header').val(data.header);
                     $('#remarks').val(data.remarks);
+                    $('#favcolor').val(data.favcolor);
                     $('#image').val('');
                     $('#preview1').attr("src", "{{ asset('/') }}"+ data.image_small);
 

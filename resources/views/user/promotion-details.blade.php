@@ -44,8 +44,7 @@
             <!-- start: Inner page hero -->
             <div class="inner-page-hero header-bg" >
                 <div class="container">
-                    <h2 class="text-white">Single Promotion Details...</h2>
-                    <p class="lead text-white">We believe in better quality and service</p>
+                    <h2 class="text-white">@if($singleData->header)  {{ $singleData->header }} @else Single Promotion Details... @endif</h2>
                 </div>
                 <!-- end:Container -->
             </div>

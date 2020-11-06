@@ -225,6 +225,7 @@
                     //console.log(data);
                     $('#hidden_id').val(id);
                     $('#title').val(data.title);
+                    $('#header').val(data.header);
                     $('#price_old').val(data.price_old);
                     $('#price_new').val(data.price_new);
                     $('#details').summernote ('code', data.details);

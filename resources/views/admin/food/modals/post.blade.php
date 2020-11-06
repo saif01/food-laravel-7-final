@@ -21,6 +21,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label">Header Text : </label>
+                        <input type="text" name="header" id="header" class="form-control" placeholder="Enter Promotion Header"/>
+                    </div>
+
+                    <div class="form-group">
                         <label class="control-label">Post Details : </label>
                         <textarea name="details" id="details" class="form-control"></textarea>
                     </div>
@@ -29,6 +34,7 @@
                         <div class="col-md-6">
                             <label class="control-label"> Image : </label>
                             <input type="file" name="image" id="image" class="form-control" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" />
+                            <span class="text-danger">Picture Resolution (391 * 213) px</span>
                         </div>
                         <div class="col-md-6">
                             <img id="preview1" alt="Image Not Selected" class="rounded mx-auto d-block" width="200" height="150" />

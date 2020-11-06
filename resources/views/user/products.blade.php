@@ -8,11 +8,13 @@
     <div class="inner-page-hero header-bg" >
         <div class="container">
             <h2 class="text-white">
-                @if ($subcategory)
-                    {{ $subcategory }}
+                @if ($category)
+                    {{ $category->name }}
                 @else
                     All
                 @endif
+
+                Products
             </h2>
         </div>
         <!-- end:Container -->
@@ -25,11 +27,9 @@
                 <li><a href="{{ url('/') }}" class="active">Home</a></li>
                 <li><a href="{{ url('/products/all') }}">Product</a></li>
                 @if ($category)
-                     <li class="text-danger">{{ $category }}</li>
+                     <li class="text-danger"> {{  $category->name }}</li>
                 @endif
-                @if ($subcategory)
-                     <li class="text-danger">{{ $subcategory }}</li>
-                @endif
+               
             </ul>
         </div>
     </div>

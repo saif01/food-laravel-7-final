@@ -23,7 +23,7 @@
                         <div class="col-md-6">
                             <label class="control-label"> Image : </label>
                             <input type="file" name="image" id="image" class="form-control" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" />
-                            <span class="text-danger">Picture Resolution 895*350</span>
+                            <span class="text-danger">Picture Resolution (895 * 350) px</span>
                         </div>
                         <div class="col-md-6">
                             <img id="preview1" alt="Image Not Selected" class="rounded mx-auto d-block" width="200" height="70" />

@@ -101,6 +101,12 @@
                                     @endphp
 
                                     @foreach($cat_data as $cat)
+                                        <li><a href="{{ route('user.cat.products', $cat->id) }}" class="dropdown-item">{{ $cat->name }}</a></li>
+                                    @endforeach
+
+
+
+                                    {{-- @foreach($cat_data as $cat)
 
 
                                     @php
@@ -128,7 +134,7 @@
                                         @endif
                                     </li>
 
-                                    @endforeach
+                                    @endforeach --}}
 
                                 </ul>
                             </li>
@@ -150,22 +156,23 @@
                                             <ul aria-labelledby="dropdownMenu2" class="dropdown-menu border-0 shadow">
                                                 <li>
                                                     <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-1') }}" class="dropdown-item">Zone 1</a>
-                            </li>
-                            <li>
-                                <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-2') }}" class="dropdown-item">Zone 2</a>
-                            </li>
-                            <li>
-                                <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-3') }}" class="dropdown-item">Zone 3</a>
-                            </li>
-                            <li>
-                                <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-4') }}" class="dropdown-item">Zone 4</a>
-                            </li>
-                            <li>
-                                <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-5') }}" class="dropdown-item">Zone 5</a>
-                            </li>
-                        </ul>
-                        </li>
-                        <!-- End Level two --> --}}
+                                            </li>
+                                            <li>
+                                                <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-2') }}" class="dropdown-item">Zone 2</a>
+                                            </li>
+                                            <li>
+                                                <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-3') }}" class="dropdown-item">Zone 3</a>
+                                            </li>
+                                            <li>
+                                                <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-4') }}" class="dropdown-item">Zone 4</a>
+                                            </li>
+                                            <li>
+                                                <a tabindex="-1" href="{{ route('user.outlate.subarea','dh-5') }}" class="dropdown-item">Zone 5</a>
+                                            </li>
+                                        </ul>
+                                        </li>
+                                        <!-- End Level two --> 
+                                    --}}
 
                         <li><a href="{{ route('user.outlate.subarea','dhk') }}" class="dropdown-item">Dhaka </a></li>
 
@@ -206,7 +213,7 @@
                 <!-- bottom footer statrs -->
                 <div class="bottom-footer">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-3 about color-gray">
+                        {{-- <div class="col-xs-12 col-sm-3 about color-gray">
                             <h5>About Us</h5>
                             <ul>
                                 <li><a href="about">About us</a> </li>
@@ -225,11 +232,38 @@
                         <div class="col-xs-12 col-sm-5 additional-info color-gray">
                             <h5>Addition informations</h5>
                             <p>Join the thousands of other restaurants who benefit from having their menus on TakeOff</p>
-                        </div>
+                        </div> --}}
+
+                        @php
+                            $contactData = App\Models\Contact::where('status', '1')->orderBy('id', 'desc')->get();
+                        @endphp
+
+                            {{-- <h5>Address</h5> --}}
+                            @foreach ($contactData as $item)
+                            <div class="col-6 address color-gray">
+                                @if($item->contact)
+                                    <h5><b>Phone : </b><a href="tel:+88 {{ $item->contact }}">{{ $item->contact }}</a> </h5>
+                                @endif
+                                @if($item->telephone)
+                                    <p><b>Telephone : </b> {{ $item->telephone }}</p>
+                                @endif
+                                @if($item->email)
+                                    <p><b>E-mail : </b> {{ $item->email }} </span></p>
+                                @endif
+                                @if($item->address)
+                                    <p><b>Address : </b> {{ $item->address }}</p>
+                                @endif
+                                
+                            </div>
+                            @endforeach
+            
+                        
                     </div>
                 </div>
                 <!-- bottom footer ends -->
+                <p class="m-0 text-muted small">Copyright &copy; Powered By CPB-IT</p>
             </div>
+            
         </footer> <!-- end:Footer -->
     </div>
     <!--/end:Site wrapper -->

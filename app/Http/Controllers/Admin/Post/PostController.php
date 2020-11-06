@@ -26,7 +26,7 @@ class PostController extends Controller
     {
 
         if (request()->ajax()) {
-            $data = Post::with('publisher', 'creator')->latest('id');
+            $data = Post::with('publisher', 'creator')->get();
 
             //dd($data);
 
@@ -48,6 +48,7 @@ class PostController extends Controller
                     $button = '';
 
                     $button .= '<b>Title : </b>' . $data->title . '<br>';
+                    $button .= '<b>Header : </b>' . $data->header . '<br>';
                     $button .= '<b>Details : </b>' . $data->details . '<br>';
 
                     if ($data->creator) {
@@ -122,6 +123,7 @@ class PostController extends Controller
 
         $rules = array(
             'title'    =>  'required|unique:posts|min:3|max:300',
+            'header'    =>  'required|min:3|max:200',
             'details'    =>  'required|min:3|max:20000',
             'image' => 'required|max:500|mimes:jpg,jpeg,png',
         );
@@ -136,9 +138,10 @@ class PostController extends Controller
 
             $data = new Post();
 
-            $data->title    =   $request->title;
+            $data->title       =   $request->title;
+            $data->header      =   $request->header;
             $data->details     =   $request->details;
-            $data->created_by = Auth::user()->id;
+            $data->created_by  =   Auth::user()->id;
 
 
 
@@ -200,9 +203,10 @@ class PostController extends Controller
         $id = $request->hidden_id;
 
         $rules = array(
-            'title'    =>  'required|min:3|max:300|unique:posts,title,' . $id,
+            'title'      =>  'required|min:3|max:300|unique:posts,title,' . $id,
+            'header'     =>  'required|min:3|max:200',
             'details'    =>  'required|min:3|max:20000',
-            'image' => 'nullable|max:500|mimes:jpg,jpeg,png',
+            'image'      =>  'nullable|max:500|mimes:jpg,jpeg,png',
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -213,8 +217,9 @@ class PostController extends Controller
 
             $data = Post::find($id);
 
-            $data->title    =   $request->title;
-            $data->details     =   $request->details;
+            $data->title      =   $request->title;
+            $data->header     =   $request->header;
+            $data->details    =   $request->details;
             $data->created_by = Auth::user()->id;
             $data->updated_at = Carbon::now();
 

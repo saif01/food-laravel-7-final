@@ -16,16 +16,6 @@
 
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <label class="control-label"> Image : </label>
-                            <input type="file" name="image" id="image" class="form-control" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" />
-                            <span class="text-danger">Picture Resolution 1920*1080</span>
-                        </div>
-                        <div class="col-md-6">
-                            <img id="preview1" alt="Image Not Selected" class="rounded mx-auto d-block" width="200" height="150" />
-                        </div>
-                    </div>
-                     <div class="form-group row">
-                        <div class="col-md-6">
                             <label class="control-label"> Image Header : </label>
                             <input type="text" name="header" id="header" class="form-control" placeholder="Enter Image Header"  />
                             <span class="text-danger">Max 20 characters</span>
@@ -36,6 +26,26 @@
                             <span class="text-danger">Max 100 characters</span>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="control-label"> Text Color : </label>
+                            <input type="text" name="favcolor" id="favcolor" class="simple_color form-control"  value="#e51937"/>
+                        </div>
+                    
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="control-label"> Image : </label>
+                            <input type="file" name="image" id="image" class="form-control" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" />
+                            <span class="text-danger">Picture Resolution (1920 * 1080) px</span>
+                        </div>
+                        <div class="col-md-6">
+                            <img id="preview1" alt="Image Not Selected" class="rounded mx-auto d-block" width="200" height="150" />
+                        </div>
+                    </div>
+                   
 
 
                     <br />

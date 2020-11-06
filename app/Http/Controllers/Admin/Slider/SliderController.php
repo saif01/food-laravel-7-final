@@ -26,7 +26,7 @@ class SliderController extends Controller
     {
 
         if (request()->ajax()) {
-            $data = Slider::with('publisher', 'creator')->latest('id');
+            $data = Slider::with('publisher', 'creator')->get();
 
             //dd($data);
 
@@ -49,6 +49,7 @@ class SliderController extends Controller
 
                     $button .= '<b>Header : </b>' . $data->header . '<br>';
                     $button .= '<b>Remarks : </b>' . $data->remarks . '<br>';
+                    $button .= '<b>Color : </b> <div style="background-color: ' . $data->favcolor . '; border: 1px solid rgb(0, 0, 0); width: 115px; height: 20px;"></div> ' . $data->favcolor . '<br>';
 
                     if ($data->creator) {
                         $button .= '<span class="text-muted"><b>Created By : </b>' . $data->creator->name . '</span>';
@@ -137,6 +138,7 @@ class SliderController extends Controller
             $data->created_by = Auth::user()->id;
             $data->header = $request->header;
             $data->remarks = $request->remarks;
+            $data->favcolor = $request->favcolor;
 
             $image = $request->file('image');
             if ($image) {
@@ -210,6 +212,7 @@ class SliderController extends Controller
             $data = Slider::find($id);
             $data->header = $request->header;
             $data->remarks = $request->remarks;
+            $data->favcolor = $request->favcolor;
             $data->created_by = Auth::user()->id;
             $data->updated_at = Carbon::now();
 
