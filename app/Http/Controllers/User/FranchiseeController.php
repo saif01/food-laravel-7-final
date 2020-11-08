@@ -23,13 +23,13 @@ class FranchiseeController extends Controller
     {
 
         $rules = array(
-            'name' => 'required|max:255',
-            'age' => 'required|max:100',
-            'occupation' => 'required|max:100',
-            'location' => 'required|max:100',
-            'contact' => 'required|regex:/(01)[0-9]{9}/|max:11',
-            'email'    =>  'required|email|max:50',
-            'address' => 'required|max:1000',
+            'name'      => 'required|max:255',
+            'age'       => 'required|max:100',
+            'occupation'=> 'required|max:100',
+            'location'  => 'required|max:100',
+            'contact'   => 'required|regex:/(01)[0-9]{9}/|max:11',
+            'email'     => 'nullable|email|max:50',
+            'address'   => 'required|max:1000',
         );
 
         $error = Validator::make($request->all(), $rules);

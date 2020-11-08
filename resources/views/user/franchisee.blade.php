@@ -91,9 +91,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group required">
+                                    <div class="form-group">
                                         <label class="control-label" for="form_email">Email </label>
-                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" >
+                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email" >
 
                                     </div>
                                 </div>
