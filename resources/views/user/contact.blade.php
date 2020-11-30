@@ -93,7 +93,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="form-group required">
+                                    <div class="form-group">
                                         <label class="control-label">Email </label>
                                         <input type="email" name="email" class="form-control" placeholder="Please enter your email">
                                     </div>

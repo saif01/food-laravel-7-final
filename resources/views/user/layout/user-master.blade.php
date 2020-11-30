@@ -190,8 +190,8 @@
             </nav>
         </header>
         <!-- banner part starts -->
-
-        @yield('content')
+            @yield('content')
+        
 
         {{-- Sofial Media Icons --}}
         <div class="sbuttons">
@@ -240,7 +240,7 @@
 
                             {{-- <h5>Address</h5> --}}
                             @foreach ($contactData as $item)
-                            <div class="col-6 address color-gray">
+                            <div class="col-md-6 address color-gray">
                                 @if($item->contact)
                                     <h5><b>Phone : </b><a href="tel:+88 {{ $item->contact }}">{{ $item->contact }}</a> </h5>
                                 @endif
