@@ -124,7 +124,7 @@ class PostController extends Controller
         $rules = array(
             'title'    =>  'required|unique:posts|min:3|max:300',
             'header'    =>  'required|min:3|max:200',
-            'details'    =>  'required|min:3|max:20000',
+            'details'    =>  'required|min:3|max:40000',
             'image' => 'required|max:500|mimes:jpg,jpeg,png',
         );
 
@@ -205,7 +205,7 @@ class PostController extends Controller
         $rules = array(
             'title'      =>  'required|min:3|max:300|unique:posts,title,' . $id,
             'header'     =>  'required|min:3|max:200',
-            'details'    =>  'required|min:3|max:20000',
+            'details'    =>  'required|min:3|max:40000',
             'image'      =>  'nullable|max:500|mimes:jpg,jpeg,png',
         );
 

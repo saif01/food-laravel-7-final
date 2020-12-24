@@ -13,58 +13,77 @@
         background-color: inherit;
     }
 
-    /* .carousel-item {
-        height: 100vh;
-        background-size: cover;
-        background-position: center center;
-    }
-
-    .carousel-item{
-        margin: 0;
-        color: white;
-    }
-
-    .carousel-indicators > .active {
-        background-color:red;
-    }
-    .carousel-caption h1{
-        color:red;
-    } */
-    /* .carousel-caption {
-        background: rgba(0, 0, 0, 0.35);
-        top: 50%;
-        transform: translateY(-50%);
-        bottom: initial;
-        
-    } */
-
     .custom-font{
         font-family: 'Sansita Swashed', cursive !important;
     }
 
+    .promotion-btn{
+        color: white;
+        font-size: larger;
+    }
+
     .carousel-item {
-        max-height: 100vh;
+        /* max-height: 100vh; */
         background-size: cover;
         background-position: center center;
     }
-    /* .carousel-caption {
-        background: rgba(0, 0, 0, 0.35);
-         top: 50%;
-        transform: translateY(-50%);
-        bottom: initial; 
-        
-    } */
+ 
+
+    .carousel-item {
+        /* height: 100vh; */
+        max-height: 670px;
+        background: no-repeat center center scroll;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 
 
-    /* .carousel-item .img-fluid {
-  width:100%;
-  height:100%;
-} */
+    /* // Small devices (landscape phones, 576px and up) */
+    @media (min-width: 576px) { 
+        .text_size {
+            font-size: 30px !important;
+        }
 
-/* .img-fluid {
-    max-width: 100%;
-    height: auto;
-} */
+        .text_size_2 {
+            font-size: 15px !important;
+        }
+    }
+
+    /* // Medium devices (tablets, 768px and up) */
+    @media (min-width: 768px) { 
+        .text_size {
+            font-size: 50px !important;
+        }
+
+        .text_size_2 {
+            font-size: 20px !important;
+        }
+    }
+
+    /* // Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) { 
+        .text_size {
+            font-size: 100px !important;
+        }
+
+        .text_size_2 {
+            font-size: 30px !important;
+        }
+    }
+
+    /* // Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) { 
+        .text_size {
+            font-size: 120px !important;
+        }
+
+        .text_size_2 {
+            font-size: 40px !important;
+        }
+    }
+
 
 </style>
 
@@ -85,9 +104,9 @@
 {{-- Main Content --}}
 @section('content')
 
-<section style="padding-top: 60px !important;">
+<section >
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="padding-top: 60px;">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -104,8 +123,8 @@
             <div class="carousel-item {{ $isFirst ? ' active' : '' }} ">
                 <img class="img-fluid" src="{{ asset( $slide->image ) }}" alt="Slider Image">
                 <div class="carousel-caption text-center">
-                    <p class="h1 font-weight-bold animate__animated animate__heartBeat custom-font" style="color:{{ $slide->favcolor }} !important"  >{{ $slide->header }}</p>
-                    <p class="h5 text-light custom-font" style="color:{{ $slide->favcolor }} !important">{{ $slide->remarks }}</p>
+                    <p class="text_size font-weight-bold animate__animated animate__heartBeat custom-font" style="color:{{ $slide->favcolor }} !important"  >{{ $slide->header }}</p>
+                    <p class="text_size_2 text-light custom-font" style="color:{{ $slide->favcolor }} !important">{{ $slide->remarks }}</p>
                 </div>
             </div>
 
@@ -149,7 +168,7 @@
                     <a href="{{ url('/promotion-details/'.$promotion->id) }}">
                         <img src="{{ asset($promotion->image) }}" class="round_img">
                         <div class="card-body">
-                            <a href="{{ url('/promotion-details/'.$promotion->id) }}" class="card-text btn theme-btn-dash m-t-30"><i class="fa fa-eye" aria-hidden="true"></i>
+                            <a href="{{ url('/promotion-details/'.$promotion->id) }}" class="card-text btn theme-btn-dash m-t-30 promotion-btn"><i class="fa fa-eye" aria-hidden="true"></i>
                                 View Details</a>
                         </div>
                     </a>
@@ -220,7 +239,7 @@
                     <div class="content">
                         <h5><a href="{{ url('/products-details/'.$rowProduct->id) }}">{{ Str::limit($rowProduct->title, $limit = 30 ) }}</a></h5>
                         <div class="product-name min-height">
-                            {!! substr(strip_tags($rowPost->details), 0, 300) !!} 
+                            {!! substr(strip_tags($rowProduct->details), 0, 300) !!} 
                             <a href="{{ url('/products-details/'.$rowProduct->id) }}"> ...... Read More.</a>
                         </div>
 
