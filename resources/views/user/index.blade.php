@@ -19,15 +19,13 @@
 
     .promotion-btn{
         color: white;
+        border: 2px dashed #050505;
         font-size: larger;
     }
 
-    .carousel-item {
-        /* max-height: 100vh; */
-        background-size: cover;
-        background-position: center center;
+    .promotion-btn:hover{
+        background: #4e4e4e;
     }
- 
 
     .carousel-item {
         /* height: 100vh; */
@@ -38,6 +36,18 @@
         -o-background-size: cover;
         background-size: cover;
     }
+
+    .carousel-item img{
+        width: 100%;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    /* .theme-btn-dash {
+        border: 2px dashed #050505;
+        background-color: transparent;
+    } */
+ 
 
 
     /* // Small devices (landscape phones, 576px and up) */
